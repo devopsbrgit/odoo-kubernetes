@@ -1,8 +1,8 @@
-# Instalar o docker no Master
+# Install docker - Master
 ```bash
 curl https://releases.rancher.com/install-docker/24.0.7.sh | sh
 ```
-# Instalar o Runcher no Master
+# Install Runcher - Master
 ```bash
 docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
@@ -10,7 +10,7 @@ docker run -d --restart=unless-stopped \
   rancher/rancher:latest \
   --acme-domain rancher.devopsbr.com.br
 ```
-# Instalar o Kubectl no Master  
+# Install Kubectl - Master  
 ```bash
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
