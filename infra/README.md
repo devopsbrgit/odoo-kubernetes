@@ -29,7 +29,7 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.4/confi
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-v
+```
 # Install CertManager
 ```bash
 kubectl create namespace cert-manager
