@@ -5,7 +5,7 @@ metadata:
   namespace: odoo
 
 spec:
-  secretName: secret-tls
+  secretName: odoo-tls
   renewBefore: 240h
   duration: 2160h
   commonName: odoo.app.devopsbr.com.br
