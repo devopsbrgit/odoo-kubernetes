@@ -6,7 +6,6 @@ metadata:
     nginx.ingress.kubernetes.io/affinity: "cookie"
     nginx.ingress.kubernetes.io/session-cookie-name: "odoo-session"
     nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
-    nginx.ingress.kubernetes.io/default-backend: odoo
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
@@ -24,3 +23,9 @@ spec:
     - hosts:
         - odoo.app.devopsbr.com.br  
       secretName: odoo-tls             
+  defaultBackend:
+    service:
+      name: odoo
+      port:
+        number: 8069
+  ingressClassName: nginx      
