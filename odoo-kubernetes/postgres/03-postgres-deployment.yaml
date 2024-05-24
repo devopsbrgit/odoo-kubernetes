@@ -16,7 +16,13 @@ spec:
       initContainers:
         - name: init-postgres
           image: postgres:15
-          command: ['sh', '-c', 'psql -U $POSTGRES_USER -tc "SELECT 1 FROM pg_database WHERE datname = \'$POSTGRES_DB\'" | grep -q 1 && psql -U $POSTGRES_USER -c "DROP DATABASE $POSTGRES_DB"']
+          command: 
+            - sh
+            - -c
+            - |
+              if psql -U $POSTGRES_USER -lqt | cut -d \| -f 1 | grep postgresdb; then
+                psql -U $POSTGRES_USER -c "DROP DATABASE postgresdb";
+              fi
           env:
             - name: POSTGRES_DB
               valueFrom:
