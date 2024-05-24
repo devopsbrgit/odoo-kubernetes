@@ -13,6 +13,26 @@ spec:
       labels:
         app: postgres
     spec:
+      initContainers:
+        - name: init-postgres
+          image: postgres:15
+          command: ['sh', '-c', 'psql -U $POSTGRES_USER -tc "SELECT 1 FROM pg_database WHERE datname = \'$POSTGRES_DB\'" | grep -q 1 && psql -U $POSTGRES_USER -c "DROP DATABASE $POSTGRES_DB"']
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_PASSWORD
       containers:
         - name: postgres
           image: postgres:15 # Sets Image
