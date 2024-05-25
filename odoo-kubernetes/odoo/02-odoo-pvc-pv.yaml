@@ -1,30 +1,15 @@
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: odoo-pv-volume  # Sets PV's name
-  labels:
-    type: local  # Sets PV's type to local
-    app: odoo
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 5Gi # Sets PV Volume
-  accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/mnt/odoo"
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: odoo-pv-claim  # Sets name of PVC
+  name: odoo-pv-claim
+  annotations:
+     longhorn.io/replica-count: "3"
   labels:
     app: odoo
 spec:
-  storageClassName: manual
+  storageClassName: longhorn
   accessModes:
-    - ReadWriteMany  # Sets read and write access
+    - ReadWriteMany
   resources:
     requests:
-      storage: 5Gi  # Sets volume size
+      storage: 10Gi

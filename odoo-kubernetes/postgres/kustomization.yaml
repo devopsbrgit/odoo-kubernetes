@@ -3,7 +3,4 @@ kind: Kustomization
 
 resources:
   - 00-postgress-namespace.yaml
-  - 01-postgres-config.yaml
-  - 02-postgres-pvc-pv.yaml
-  - 03-postgres-deployment.yaml
-  - 04-postgres-service.yaml
+  - 01-postgres-statefulset.yaml
