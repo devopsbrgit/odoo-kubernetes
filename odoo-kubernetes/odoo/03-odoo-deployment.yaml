@@ -25,12 +25,14 @@ spec:
           env:
             - name: USER
               valueFrom:
-                 name: odoo.postgres.credentials.postgresql.acid.zalan.do
-                 key: username
+                secretkeyRef:
+                  name: odoo.postgres.credentials.postgresql.acid.zalan.do
+                  key: username
             - name: PASSWORD
               valueFrom:
-                 name: odoo.postgres.credentials.postgresql.acid.zalan.do
-                 key: password           
+                secretkeyRef:
+                  name: odoo.postgres.credentials.postgresql.acid.zalan.do
+                  key: password           
           args: ["--log-level=info", "--db-filter=.*"]
           volumeMounts:
             - mountPath: /var/lib/odoo
