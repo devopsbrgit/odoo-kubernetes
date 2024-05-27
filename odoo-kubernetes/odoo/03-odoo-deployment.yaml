@@ -1,10 +1,10 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: odoo  # Sets Deployment name
+  name: odoo  # Nome do Deployment
+  namespace: odoo  # Certifique-se de que o namespace está correto
 spec:
-  replicas: 4 
+  replicas: 4
   selector:
     matchLabels:
       app: odoo
@@ -15,22 +15,22 @@ spec:
     spec:
       containers:
         - name: odoo
-          image: odoo:16.0 # Sets Image
+          image: odoo:16.0 # Define a imagem
           imagePullPolicy: "IfNotPresent"
           ports:
-            - containerPort: 8069  # Exposes container port
+            - containerPort: 8069  # Expõe a porta do container
           envFrom:
             - configMapRef:
                 name: odoo-config
           env:
             - name: USER
               valueFrom:
-                secretkeyRef:
+                secretKeyRef:
                   name: odoo.postgres.credentials.postgresql.acid.zalan.do
                   key: username
             - name: PASSWORD
               valueFrom:
-                secretkeyRef:
+                secretKeyRef:
                   name: odoo.postgres.credentials.postgresql.acid.zalan.do
                   key: password           
           args: ["--log-level=info", "--db-filter=.*"]
@@ -48,4 +48,3 @@ spec:
         - name: odoo
           persistentVolumeClaim:
             claimName: odoo-pv-claim
-
