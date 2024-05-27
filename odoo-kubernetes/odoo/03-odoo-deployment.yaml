@@ -4,7 +4,7 @@ metadata:
   name: odoo  # Nome do Deployment
   namespace: odoo  # Certifique-se de que o namespace está correto
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: odoo
